@@ -224,19 +224,3 @@ pytest tests/ -v
 Each test runs against a real PostgreSQL test database (`sales_test_db`) with the
 schema recreated fresh per test for isolation — this exercises the actual Postgres
 constraints (uniqueness, checks) rather than mocking them away.
-
-## 5. What's incomplete / would change for production
-
-In the interest of prioritizing working → correct → tested → secure → deployable
-within the assessment window, the following were deliberately scoped out:
-
-- **Refresh tokens** — the JWT is a single long-lived (12h) access token. In
-  production I'd add a short-lived access token + refresh token pair.
-- **Rate limiting / brute-force protection** on the login endpoint.
-- **Pagination** — list endpoints cap at 200 rows via `LIMIT` rather than true
-  cursor/offset pagination, fine for assessment-scale data, not for a large catalog.
-- **Soft-delete / audit trail** on orders and catalog changes.
-- **Native mobile app** — the salesman client is a responsive React web app rather
-  than a Flutter APK, per the assessment's "another suitable frontend technology"
-  allowance; a PWA manifest would be the next step for an installable, offline-capable
-  version.
