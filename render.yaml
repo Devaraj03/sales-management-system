@@ -35,7 +35,7 @@ services:
       - key: CORS_ORIGINS
         # Update after the two static sites below get their real onrender.com
         # URLs (comma-separated, no spaces) -- see README "one manual step".
-        value: "https://sales-admin-dashboard.onrender.com,https://sales-salesman-app.onrender.com"
+        value: "https://sales-admin-dashboard-wdam.onrender.com,https://sales-salesman-app.onrender.com"
 
   # ---------- React Admin Dashboard (static site) ----------
   - type: web
@@ -49,7 +49,7 @@ services:
         fromService:
           type: web
           name: sales-backend
-          property: hostport
+          envVarKey: RENDER_EXTERNAL_URL
     routes:
       - type: rewrite
         source: /*
@@ -67,7 +67,7 @@ services:
         fromService:
           type: web
           name: sales-backend
-          property: hostport
+          envVarKey: RENDER_EXTERNAL_URL
     routes:
       - type: rewrite
         source: /*
